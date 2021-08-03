@@ -1,0 +1,142 @@
+
+\documentclass[a4paper,12pt,titlepage]{article}
+\usepackage[utf8]{inputenc} 
+\usepackage{tikz,pgf}
+\usepackage{indentfirst}
+\usepackage{amsfonts}
+\usepackage[english]{babel}
+
+
+%Url e Bookmarks of output PDF 
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	%	pdftitle={Document title},
+	bookmarks=true,
+	%pdfpagemode=FullScreen,
+}
+
+
+
+
+\usepackage{rotating}
+
+\usepackage{tabularx}
+\usepackage{multirow} 
+\usepackage{lscape}
+\usepackage{tikz}
+%to insert PDF files
+\usepackage[final]{pdfpages}
+%--Packages--
+
+\usepackage{eurosym}
+\usepackage{graphicx} \usepackage{verbatim}
+\usepackage{graphics}
+\usepackage{tikz,pgf}
+\usepackage{indentfirst}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsmath,amssymb,amsthm,textcomp}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{amsmath,amssymb,mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx,color,listings}
+\frenchspacing 
+\usepackage{geometry}
+\usepackage{rotating}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{listings}
+%Cool maths printing
+\usepackage{amsmath}
+%PseudoCode
+\usepackage{algorithm2e}
+
+
+\begin{document}
+	\section*{Modello CPL (\textit{Capacitated Plant Location)} Multi prodotto}
+	\textbf{Insiemi}\\
+	- $V_1$ = insieme dei siti potenziali;\,\,(\textit{indice i});\\
+	\\
+	- $V_2$ = insieme dei siti da servire;\,\,(\textit{indice j});\\
+	\\
+	- $P$ = insieme dei prodotti;\,\,(\textit{indice p});\\
+	\\
+	- $A$ = insieme dei tragitti $(i,j)$ che uniscono i siti $i\in V_1$ ed $j\in V_2$\,;\\
+	\\
+	\textbf{Parametri}\\
+	- $d_{pj}$ = domanda di prodotto $p\in P$ richiesto da sito $j\in V_2$;\,\, $\forall p \in P$,\, $\forall j \in V_2$\\
+	\\
+	- $dist_{ij}$ = distanza tra sito $i\in V_1$ e sito $j\in V_2$;\,\,\,$\forall (i,j)\in A$\\
+	\\
+	- $c$ = costo di trasporto per unità di prodotto ed unità di distanza;\\
+	\textbf{\textit{Nota:}} Si suppone costante.\\
+	- $c_{pij}$ = costo per rifornire sito $j\in V_2$ tramite sito $i\in V_1$  soddisfacendo intera domanda $d_{pj}$; \,\, $\forall p \in P$,\,\,$\forall (i,j)\in A$\\
+	\begin{equation*}
+	c_{pij} = 2\cdot c\cdot dist_{ij}\cdot d_{pj}
+	\end{equation*}
+	\textbf{\textit{Nota:}} Il valore 2 consente di tenere conto del costo associato sia all'andata che al ritorno, considerando di percorrere 2 volte la distanza $dist_{ij}$.\\
+	\\
+	\textbf{Variabili}\\
+	- $x_{pij}$ = frazione di domanda $d_{pj}$ espressa dal sito $j\in V_2$ e soddisfatta dal sito $i\in V_1$ relativamente al prodotto $p\in P$;\,\, $\forall p \in P$,\,\,$\forall (i,j)\in A$\\
+	\textbf{\textit{Nota:}} $0 \leq x_{pij}\leq 1$\\
+	\\
+	\[
+	-\,y_{i}=
+	\left\{
+	\begin{array}{ll}
+	1\quad\mbox{se il sito $i\in V_1$ è attivato};\,\,\forall i\in V_1 \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad \\
+	0\quad\mbox{altrimenti}\\
+	\end{array}
+	\right.
+	\]
+	
+	
+	
+	\newpage
+	
+	
+	\textbf{Condizione di Ammissibilità}\\
+	\begin{equation*}
+	\sum_{p\in P}\sum_{j\in V_2} d_{pj} \leq \sum_{i\in V_1} q_i 
+	\end{equation*}
+	\\
+	\textbf{Formulazione Matematica}\\
+	\begin{equation}
+	min\,\, \sum_{i\in V_1} f_i \cdot y_i + \sum_{p\in P}\sum_{j\in V_2} c_{pij} \cdot x_{pij}
+	\tag{1}
+	\end{equation}
+	\begin{center}
+		s.v
+	\end{center}
+	\begin{equation}
+	\sum_{i\in V_1} x_{pij} = 1 \qquad \forall p \in P,\,\,\, \forall j \in V_2
+	\tag{2}
+	\end{equation}
+	
+	\begin{equation}
+	\sum_{p\in P}\sum_{j\in V_2} d_{pj} \cdot x_{pij} \leq q_i \cdot y_i \qquad \forall i \in V_1
+	\tag{3}
+	\end{equation}
+	
+	\begin{equation}
+	x_{pij}\geq 0 \qquad \forall p \in P,\,\,\,\forall (i,j)\in A
+	\tag{4}
+	\end{equation}
+	
+	\begin{equation}
+	y_i \in \left\lbrace 0,1\right\rbrace  \qquad \forall i \in V_1
+	\tag{5}
+	\end{equation}
+	
+\end{document}
